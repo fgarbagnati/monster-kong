@@ -21,9 +21,11 @@ var GameState = {
 	create: function() {
 		this.ground = this.add.sprite(0, 500, 'ground');
 		this.game.physics.arcade.enable(this.ground);
+		this.ground.body.allowGravity = false;
 
 		var platform = this.add.sprite(0, 300, 'platform');
 		this.game.physics.arcade.enable(platform);
+		platform.body.allowGravity = false;
 
 		this.player = this.add.sprite(100, 200, 'player', 3);
 		this.player.anchor.setTo(0.5);
