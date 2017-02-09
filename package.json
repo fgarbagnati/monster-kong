@@ -1,0 +1,14 @@
+{
+  "name": "monster-kong",
+  "description": "Monster Kong game",
+  "version": "1.0.0",
+  "engines": {
+    "node": "6.9.4"
+  },
+  "dependencies": {
+    "express": "^4.14.0"
+  },
+  "scripts": {
+    "start": "node index.js"
+  }
+}
