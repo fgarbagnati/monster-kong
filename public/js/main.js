@@ -3,6 +3,8 @@ var GameState = {
 		this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 		this.scale.pageAlignHorizontally = true;
 		this.scale.pageAlignVertically = true;
+
+		this.game.physics.startSystem(Phaser.Physics.ARCADE);
 	},
 	preload: function() {
 		this.load.image('ground', 'assets/images/ground.png');
