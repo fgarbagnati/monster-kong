@@ -5,6 +5,7 @@ var GameState = {
 		this.scale.pageAlignVertically = true;
 
 		this.game.physics.startSystem(Phaser.Physics.ARCADE);
+		this.game.physics.arcade.gravity.y = 1000;
 	},
 	preload: function() {
 		this.load.image('ground', 'assets/images/ground.png');
@@ -19,13 +20,16 @@ var GameState = {
 	},
 	create: function() {
 		this.ground = this.add.sprite(0, 500, 'ground');
+		this.game.physics.arcade.enable(this.ground);
 
 		var platform = this.add.sprite(0, 300, 'platform');
+		this.game.physics.arcade.enable(platform);
 
 		this.player = this.add.sprite(100, 200, 'player', 3);
 		this.player.anchor.setTo(0.5);
 		this.player.animations.add('walking', [0, 1, 2, 1], 6, true);
 		this.player.play('walking');
+		this.game.physics.arcade.enable(this.player);
 	},
 	update: function() {
 
