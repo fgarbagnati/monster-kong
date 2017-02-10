@@ -37,6 +37,8 @@ var GameState = {
 	},
 	update: function() {
 		this.game.physics.arcade.collide(this.player, this.ground, this.landed);
+		this.game.physics.arcade.collide(this.player, this.platform, this.landed);
+
 	},
 	landed: function(player, ground) {
 		console.log('landed');
