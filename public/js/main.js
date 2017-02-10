@@ -36,8 +36,8 @@ var GameState = {
 		this.game.physics.arcade.enable(this.player);
 	},
 	update: function() {
-		this.game.physics.arcade.collide(this.player, this.ground, this.landed);
-		this.game.physics.arcade.collide(this.player, this.platform, this.landed);
+		this.game.physics.arcade.collide(this.player, this.ground);
+		this.game.physics.arcade.overlap(this.player, this.platform, this.landed);
 
 	},
 	landed: function(player, ground) {
