@@ -37,6 +37,9 @@ var GameState = {
 		this.player.anchor.setTo(0.5);
 		this.player.animations.add('walking', [0, 1, 2, 1], 6, true);
 		this.game.physics.arcade.enable(this.player);
+		this.player.customParams = {};
+
+		this.createOnscreenControls();
 	},
 	update: function() {
 		this.game.physics.arcade.collide(this.player, this.ground);
@@ -56,6 +59,16 @@ var GameState = {
 	},
 	landed: function(player, ground) {
 		console.log('landed');
+	},
+	createOnscreenControls: function() {
+		this.leftArrow = this.add.button(20, 535, 'arrowButton');
+		this.rightArrow = this.add.button(110, 535, 'arrowButton');
+		this.actionArrow = this.add.button(280, 535, 'actionButton');
+
+		this.leftArrow.alpha = 0.5;
+		this.rightArrow.alpha = 0.5;
+		this.actionArrow.alpha = 0.5;
+
 	}
 };
 
