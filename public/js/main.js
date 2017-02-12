@@ -8,6 +8,8 @@ var GameState = {
 		this.game.physics.arcade.gravity.y = 1000;
 
 		this.cursors = this.game.input.keyboard.createCursorKeys();
+		this.RUNNING_SPEED = 180;
+		this.JUMPING_SPEED = 550;
 	},
 	preload: function() {
 		this.load.image('ground', 'assets/images/ground.png');
@@ -39,9 +41,13 @@ var GameState = {
 	},
 	update: function() {
 		this.game.physics.arcade.collide(this.player, this.ground);
-		this.game.physics.arcade.overlap(this.player, this.platform, this.landed);
+		this.game.physics.arcade.collide(this.player, this.platform);
 
-		
+		this.player.body.velocity.x = 0;
+
+		if(this.cursors.left.isDown) {
+			this.player.body.velocity.x = -this.RUNNING_SPEED;
+		}
 	},
 	landed: function(player, ground) {
 		console.log('landed');
