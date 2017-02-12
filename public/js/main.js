@@ -53,8 +53,9 @@ var GameState = {
 			this.player.body.velocity.x = this.RUNNING_SPEED;
 		}
 
-		if(this.cursors.up.isDown && this.player.body.touching.down) {
+		if((this.cursors.up.isDown || this.player.customParams.mustJump) && this.player.body.touching.down) {
 			this.player.body.velocity.y = -this.JUMPING_SPEED;
+			this.player.customParams.mustJump = false;
 		}
 	},
 	landed: function(player, ground) {
@@ -63,12 +64,19 @@ var GameState = {
 	createOnscreenControls: function() {
 		this.leftArrow = this.add.button(20, 535, 'arrowButton');
 		this.rightArrow = this.add.button(110, 535, 'arrowButton');
-		this.actionArrow = this.add.button(280, 535, 'actionButton');
+		this.actionButton = this.add.button(280, 535, 'actionButton');
 
 		this.leftArrow.alpha = 0.5;
 		this.rightArrow.alpha = 0.5;
-		this.actionArrow.alpha = 0.5;
+		this.actionButton.alpha = 0.5;
 
+		this.actionButton.events.onInputDown.add(function() {
+			this.player.customParams.mustJump = true; 
+		}, this);
+
+		this.actionButton.events.onInputUp.add(function() {
+			this.player.customParams.mustJump = false; 
+		}, this);
 	}
 };
 
