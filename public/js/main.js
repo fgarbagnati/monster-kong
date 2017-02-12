@@ -47,6 +47,8 @@ var GameState = {
 
 		if(this.cursors.left.isDown) {
 			this.player.body.velocity.x = -this.RUNNING_SPEED;
+		} else if (this.cursors.right.isDown) {
+			this.player.body.velocity.x = this.RUNNING_SPEED;
 		}
 	},
 	landed: function(player, ground) {
