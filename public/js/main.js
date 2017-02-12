@@ -6,6 +6,8 @@ var GameState = {
 
 		this.game.physics.startSystem(Phaser.Physics.ARCADE);
 		this.game.physics.arcade.gravity.y = 1000;
+
+		this.cursors = this.game.input.keyboard.createCursorKeys();
 	},
 	preload: function() {
 		this.load.image('ground', 'assets/images/ground.png');
@@ -39,6 +41,7 @@ var GameState = {
 		this.game.physics.arcade.collide(this.player, this.ground);
 		this.game.physics.arcade.overlap(this.player, this.platform, this.landed);
 
+		
 	},
 	landed: function(player, ground) {
 		console.log('landed');
