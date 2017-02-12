@@ -26,7 +26,7 @@ var GameState = {
 		this.load.spritesheet('fire', 'assets/images/fire_spritesheet.png', 20, 21, 2, 1, 1)
 	},
 	create: function() {
-		this.ground = this.add.sprite(0, 500, 'ground');
+		this.ground = this.add.sprite(0, 638, 'ground');
 		this.game.physics.arcade.enable(this.ground);
 		this.ground.body.allowGravity = false;
 		this.ground.body.immovable = true;
@@ -47,13 +47,14 @@ var GameState = {
 
 		this.platforms.setAll('body.immovable', true);
 		this.platforms.setAll('body.allowGravity', false);
-		this.platforms
 
-		this.player = this.add.sprite(100, 200, 'player', 3);
+		this.player = this.add.sprite(10, 545, 'player', 3);
 		this.player.anchor.setTo(0.5);
 		this.player.animations.add('walking', [0, 1, 2, 1], 6, true);
 		this.game.physics.arcade.enable(this.player);
 		this.player.customParams = {};
+
+		this.game.camera.follow(this.player);
 
 		this.createOnscreenControls();
 	},
@@ -74,9 +75,6 @@ var GameState = {
 			this.player.customParams.mustJump = false;
 		}
 	},
-	landed: function(player, ground) {
-		console.log('landed');
-	},
 	createOnscreenControls: function() {
 		this.leftArrow = this.add.button(20, 535, 'arrowButton');
 		this.rightArrow = this.add.button(110, 535, 'arrowButton');
@@ -85,6 +83,10 @@ var GameState = {
 		this.leftArrow.alpha = 0.5;
 		this.rightArrow.alpha = 0.5;
 		this.actionButton.alpha = 0.5;
+
+		this.leftArrow.fixedToCamera = true;
+		this.rightArrow.fixedToCamera = true;
+		this.actionButton.fixedToCamera = true;
 
 		this.actionButton.events.onInputDown.add(function() {
 			this.player.customParams.mustJump = true; 
