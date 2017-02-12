@@ -36,7 +36,6 @@ var GameState = {
 		this.player = this.add.sprite(100, 200, 'player', 3);
 		this.player.anchor.setTo(0.5);
 		this.player.animations.add('walking', [0, 1, 2, 1], 6, true);
-		this.player.play('walking');
 		this.game.physics.arcade.enable(this.player);
 	},
 	update: function() {
@@ -49,6 +48,10 @@ var GameState = {
 			this.player.body.velocity.x = -this.RUNNING_SPEED;
 		} else if (this.cursors.right.isDown) {
 			this.player.body.velocity.x = this.RUNNING_SPEED;
+		}
+
+		if(this.cursors.up.isDown && this.player.body.touching.down) {
+			this.player.body.velocity.y = -this.JUMPING_SPEED;
 		}
 	},
 	landed: function(player, ground) {
