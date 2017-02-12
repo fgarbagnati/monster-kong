@@ -47,9 +47,9 @@ var GameState = {
 
 		this.player.body.velocity.x = 0;
 
-		if(this.cursors.left.isDown) {
+		if(this.cursors.left.isDown || this.player.customParams.isMovingLeft) {
 			this.player.body.velocity.x = -this.RUNNING_SPEED;
-		} else if (this.cursors.right.isDown) {
+		} else if (this.cursors.right.isDown || this.player.customParams.isMovingRight) {
 			this.player.body.velocity.x = this.RUNNING_SPEED;
 		}
 
@@ -73,9 +73,22 @@ var GameState = {
 		this.actionButton.events.onInputDown.add(function() {
 			this.player.customParams.mustJump = true; 
 		}, this);
-
 		this.actionButton.events.onInputUp.add(function() {
 			this.player.customParams.mustJump = false; 
+		}, this);
+
+		this.leftArrow.events.onInputDown.add(function() {
+			this.player.customParams.isMovingLeft = true;
+		}, this);
+		this.leftArrow.events.onInputUp.add(function() {
+			this.player.customParams.isMovingLeft = false;
+		}, this);
+
+		this.rightArrow.events.onInputDown.add(function() {
+			this.player.customParams.isMovingRight = true;
+		}, this);
+		this.rightArrow.events.onInputUp.add(function() {
+			this.player.customParams.isMovingRight = false;
 		}, this);
 	}
 };
