@@ -45,6 +45,18 @@ var GameState = {
 		this.platforms.setAll('body.immovable', true);
 		this.platforms.setAll('body.allowGravity', false);
 
+		this.fires = this.add.group();
+		this.fires.enableBody = true;
+
+		var fire;
+		this.levelData.fireData.forEach(function(element) {
+			fire = this.fires.create(element.x, element.y, 'fire');
+			fire.animations.add('fire', [0, 1], 4, true);
+			fire.play('fire');
+		}, this);
+
+		this.fires.setAll('body.allowGravity', false);
+
 		this.player = this.add.sprite(this.levelData.playerStart.x, this.levelData.playerStart.y, 'player', 3);
 		this.player.anchor.setTo(0.5);
 		this.player.animations.add('walking', [0, 1, 2, 1], 6, true);
@@ -58,6 +70,8 @@ var GameState = {
 	update: function() {
 		this.game.physics.arcade.collide(this.player, this.ground);
 		this.game.physics.arcade.collide(this.player, this.platforms);
+
+		this.game.physics.arcade.overlap(this.player, this.fires, this.killPlayer);
 
 		this.player.body.velocity.x = 0;
 
@@ -112,6 +126,9 @@ var GameState = {
 		this.rightArrow.events.onInputUp.add(function() {
 			this.player.customParams.isMovingRight = false;
 		}, this);
+	},
+	killPlayer: function(player, fire) {
+		game.state.start('GameState');
 	}
 };
 
