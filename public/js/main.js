@@ -71,6 +71,8 @@ var GameState = {
 		this.game.physics.arcade.collide(this.player, this.ground);
 		this.game.physics.arcade.collide(this.player, this.platforms);
 
+		this.game.physics.arcade.overlap(this.player, this.fires, this.killPlayer);
+
 		this.player.body.velocity.x = 0;
 
 		if(this.cursors.left.isDown || this.player.customParams.isMovingLeft) {
@@ -124,6 +126,9 @@ var GameState = {
 		this.rightArrow.events.onInputUp.add(function() {
 			this.player.customParams.isMovingRight = false;
 		}, this);
+	},
+	killPlayer: function(player, fire) {
+		game.state.start('GameState');
 	}
 };
 
