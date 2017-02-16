@@ -45,6 +45,18 @@ var GameState = {
 		this.platforms.setAll('body.immovable', true);
 		this.platforms.setAll('body.allowGravity', false);
 
+		this.fires = this.add.group();
+		this.fires.enableBody = true;
+
+		var fire;
+		this.levelData.fireData.forEach(function(element) {
+			fire = this.fires.create(element.x, element.y, 'fire');
+			fire.animations.add('fire', [0, 1], 4, true);
+			fire.play('fire');
+		}, this);
+
+		this.fires.setAll('body.allowGravity', false);
+
 		this.player = this.add.sprite(this.levelData.playerStart.x, this.levelData.playerStart.y, 'player', 3);
 		this.player.anchor.setTo(0.5);
 		this.player.animations.add('walking', [0, 1, 2, 1], 6, true);
