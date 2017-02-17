@@ -57,6 +57,10 @@ var GameState = {
 
 		this.fires.setAll('body.allowGravity', false);
 
+		this.goal = this.add.sprite(this.levelData.goal.x, this.levelData.goal.y, 'goal');
+		this.game.physics.arcade.enable(this.goal);
+		this.goal.body.allowGravity = false;
+
 		this.player = this.add.sprite(this.levelData.playerStart.x, this.levelData.playerStart.y, 'player', 3);
 		this.player.anchor.setTo(0.5);
 		this.player.animations.add('walking', [0, 1, 2, 1], 6, true);
@@ -72,6 +76,7 @@ var GameState = {
 		this.game.physics.arcade.collide(this.player, this.platforms);
 
 		this.game.physics.arcade.overlap(this.player, this.fires, this.killPlayer);
+		this.game.physics.arcade.overlap(this.player, this.goal, this.win);
 
 		this.player.body.velocity.x = 0;
 
@@ -127,7 +132,11 @@ var GameState = {
 			this.player.customParams.isMovingRight = false;
 		}, this);
 	},
-	killPlayer: function(player, fire) {
+	killPlayer: function(player, goal) {
+		game.state.start('GameState');
+	},
+	win: function(player, fire) {
+		alert('You win!');
 		game.state.start('GameState');
 	}
 };
