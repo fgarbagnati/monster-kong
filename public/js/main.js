@@ -88,6 +88,7 @@ var GameState = {
 		this.game.physics.arcade.overlap(this.player, this.goal, this.win);
 
 		this.player.body.velocity.x = 0;
+		this.player.body.collideWorldBounds = true;
 
 		if(this.cursors.left.isDown || this.player.customParams.isMovingLeft) {
 			this.player.body.velocity.x = -this.RUNNING_SPEED;
